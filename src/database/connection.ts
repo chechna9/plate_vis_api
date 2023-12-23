@@ -1,17 +1,18 @@
+// connection.ts
 import mongoose from 'mongoose';
 
-const MONGODB_URI = 'mongodb://localhost:27017';
-
 const connectToDatabase = async () => {
-    try {
-        await mongoose.connect(MONGODB_URI, {
-            useNewUrlParser: true,
-            useUnifiedTopology: true,
-        } as mongoose.ConnectOptions);
-        console.log('Connected to MongoDB');
-    } catch (error) {
-        console.error('Error connecting to MongoDB:', error);
-    }
+  try {
+    const connection = await mongoose.connect('mongodb://localhost:27017/scrum_project', {
+      useNewUrlParser: true,
+      useUnifiedTopology: true,
+    } as mongoose.ConnectOptions);
+    console.log('Connected to local MongoDB');
+    return connection;
+  } catch (error) {
+    console.error('Error connecting to local MongoDB:', error);
+    throw error;
+  }
 };
 
-export { connectToDatabase };
+export  {connectToDatabase};
